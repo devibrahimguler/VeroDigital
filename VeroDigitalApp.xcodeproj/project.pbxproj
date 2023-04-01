@@ -18,6 +18,10 @@
 		0F08B84529D787FF005A568E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84429D787FF005A568E /* DataModel.swift */; };
 		0F08B84729D788DA005A568E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84629D788DA005A568E /* User.swift */; };
 		0F08B84929D7C8CB005A568E /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84829D7C8CB005A568E /* Services.swift */; };
+		0F08B84B29D7E7C2005A568E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84A29D7E7C2005A568E /* HomeViewModel.swift */; };
+		0F08B84D29D7E897005A568E /* ScrollViewDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84C29D7E897005A568E /* ScrollViewDetector.swift */; };
+		0F08B84F29D7E8D0005A568E /* PullToRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84E29D7E8D0005A568E /* PullToRefreshView.swift */; };
+		0F08B85129D7E8F3005A568E /* MissionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B85029D7E8F3005A568E /* MissionCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +37,10 @@
 		0F08B84429D787FF005A568E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		0F08B84629D788DA005A568E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0F08B84829D7C8CB005A568E /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		0F08B84A29D7E7C2005A568E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		0F08B84C29D7E897005A568E /* ScrollViewDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewDetector.swift; sourceTree = "<group>"; };
+		0F08B84E29D7E8D0005A568E /* PullToRefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshView.swift; sourceTree = "<group>"; };
+		0F08B85029D7E8F3005A568E /* MissionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +98,9 @@
 			isa = PBXGroup;
 			children = (
 				0F08B83C29D786B3005A568E /* Home.swift */,
+				0F08B84C29D7E897005A568E /* ScrollViewDetector.swift */,
+				0F08B84E29D7E8D0005A568E /* PullToRefreshView.swift */,
+				0F08B85029D7E8F3005A568E /* MissionCardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -108,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				0F08B83129D78648005A568E /* DataController.swift */,
+				0F08B84A29D7E7C2005A568E /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -191,13 +203,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F08B84529D787FF005A568E /* DataModel.swift in Sources */,
+				0F08B84D29D7E897005A568E /* ScrollViewDetector.swift in Sources */,
 				0F08B84329D787C4005A568E /* Mission.swift in Sources */,
 				0F08B83229D78648005A568E /* DataController.swift in Sources */,
+				0F08B84B29D7E7C2005A568E /* HomeViewModel.swift in Sources */,
 				0F08B82B29D78646005A568E /* ContentView.swift in Sources */,
 				0F08B84729D788DA005A568E /* User.swift in Sources */,
 				0F08B83D29D786B3005A568E /* Home.swift in Sources */,
+				0F08B84F29D7E8D0005A568E /* PullToRefreshView.swift in Sources */,
 				0F08B83529D78648005A568E /* VeroDigitalApp.xcdatamodeld in Sources */,
 				0F08B84929D7C8CB005A568E /* Services.swift in Sources */,
+				0F08B85129D7E8F3005A568E /* MissionCardView.swift in Sources */,
 				0F08B82929D78646005A568E /* VeroDigitalAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,14 +12,22 @@ import CoreImage.CIFilterBuiltins
 // DataController is a class used to control data.
 class DataController : ObservableObject {
     
+    @Published var progress : Bool = false
     @Published var fetchMission : [Missions]?
+    @Published var selectMission : [Missions]?
 
+    @Published var activeTag: String = "From The Data"
+    
     let services : Services = Services()
+    
+    var tags: [String] = [
+        "From The Data", "From The QR Code"
+    ]
     
     let container: NSPersistentContainer
     
     init() {
-        container = NSPersistentContainer(name: "VeroDigital")
+        container = NSPersistentContainer(name: "VeroDigitalApp")
         
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -30,6 +38,27 @@ class DataController : ObservableObject {
         container.viewContext.automaticallyMergesChangesFromParent = true
 
         addAllMission()
+    }
+    
+    // Used to get data from CoreData.
+    func filterByQRCode() {
+        DispatchQueue.global(qos: .userInteractive).async {
+            if let missions = self.fetchMission {
+                let results = missions
+                    .lazy
+                    .filter { mission in
+                        return self.activeTag == "From The Data" ? !mission.isQRCode : mission.isQRCode
+                    }
+                
+                DispatchQueue.main.async {
+                    self.selectMission = results.compactMap { mission in
+                        return mission
+                    }
+                    
+                }
+            }
+            
+        }
     }
     
     // Saves data to Core Data.
@@ -44,6 +73,7 @@ class DataController : ObservableObject {
     
     // Pulls data from Core Data.
     func fetchData() {
+        progress = true
         let request = NSFetchRequest<Missions>(entityName: "Missions")
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Missions.id, ascending: false)]
         
@@ -51,6 +81,7 @@ class DataController : ObservableObject {
             let fetchMissions = try container.viewContext.fetch(request)
             self.fetchMission = fetchMissions
             if self.fetchMission?.count ?? 0 > 0 {
+                progress = false
             }
         } catch {
             print("Veriler alınamadı: \(error.localizedDescription)")
@@ -67,7 +98,7 @@ class DataController : ObservableObject {
     
     // Pulls data from the API.
     func getDataWithApi() {
-        
+        progress = true
         services.getDataWithApi { data in
             if data.count != 0 {
                 
@@ -81,6 +112,8 @@ class DataController : ObservableObject {
                 }
                 
                 self.fetchData()
+                self.filterByQRCode()
+                self.progress = false
             }
         }
     }
