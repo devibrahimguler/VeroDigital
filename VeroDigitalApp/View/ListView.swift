@@ -19,7 +19,19 @@ struct ListView: View {
             ForEach(missions) { mission in
                 MissionCardView(mission: mission, animation: animation)
                     .environmentObject(viewModel)
-                
+                    .onTapGesture {
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            viewModel.animateCurrentMission = true
+                            viewModel.selectedMission = mission
+                            
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15){
+                            withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7)) {
+                                viewModel.showDetailView = true
+                                
+                            }
+                        }
+                    }
             }
             
         }

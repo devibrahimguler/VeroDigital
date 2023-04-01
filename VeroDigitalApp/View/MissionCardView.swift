@@ -60,7 +60,7 @@ struct MissionCardView: View {
                 
                 ZStack {
                     
-                    if !(viewModel.selectedMission?.id == mission.id) {
+                    if !(viewModel.showDetailView && viewModel.selectedMission?.id == mission.id) {
                         Rectangle()
                             .fill(Color(hex: "\(mission.colorCode ?? "")"))
                             .frame(width: size.width / 2, height: size.height)

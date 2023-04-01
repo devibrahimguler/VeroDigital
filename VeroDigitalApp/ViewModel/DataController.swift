@@ -20,13 +20,14 @@ class DataController : ObservableObject {
 
     @Published var activeTag: String = "From The Data"
     
-    let services : Services = Services()
+    private let services : Services = Services()
     
     var tags: [String] = [
         "From The Data", "From The QR Code"
     ]
     
-    let container: NSPersistentContainer
+    private let container: NSPersistentContainer
+    private var searchCancellable: AnyCancellable?
     
     init() {
         container = NSPersistentContainer(name: "VeroDigitalApp")
@@ -38,57 +39,18 @@ class DataController : ObservableObject {
         })
         
         container.viewContext.automaticallyMergesChangesFromParent = true
+        
+        self.searchCancellable = $searchText.removeDuplicates()
+            .debounce(for: 0.5, scheduler: RunLoop.main)
+            .sink(receiveValue: { str in
+                if str != "" {
+                    self.filterByMission()
+                } else {
+                    self.searchMission = nil
+                }
+            })
 
         addAllMission()
-    }
-    
-    // Used to get data from CoreData.
-    func filterByQRCode() {
-        DispatchQueue.global(qos: .userInteractive).async {
-            if let missions = self.fetchMission {
-                let results = missions
-                    .lazy
-                    .filter { mission in
-                        return self.activeTag == "From The Data" ? !mission.isQRCode : mission.isQRCode
-                    }
-                
-                DispatchQueue.main.async {
-                    self.selectMission = results.compactMap { mission in
-                        return mission
-                    }
-                    
-                }
-            }
-            
-        }
-    }
-    
-    // Saves data to Core Data.
-    private func save() {
-        do {
-            try container.viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-    }
-    
-    // Pulls data from Core Data.
-    func fetchData() {
-        progress = true
-        let request = NSFetchRequest<Missions>(entityName: "Missions")
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Missions.id, ascending: false)]
-        
-        do {
-            let fetchMissions = try container.viewContext.fetch(request)
-            self.fetchMission = fetchMissions
-            if self.fetchMission?.count ?? 0 > 0 {
-                progress = false
-            }
-        } catch {
-            print("Veriler alınamadı: \(error.localizedDescription)")
-        }
-        
     }
     
     // Adds Data to Core Data.
@@ -117,6 +79,76 @@ class DataController : ObservableObject {
                 self.filterByQRCode()
                 self.progress = false
             }
+        }
+    }
+    
+    // Used to get data from CoreData.
+    func filterByQRCode() {
+        DispatchQueue.global(qos: .userInteractive).async {
+            if let missions = self.fetchMission {
+                let results = missions
+                    .lazy
+                    .filter { mission in
+                        return self.activeTag == "From The Data" ? !mission.isQRCode : mission.isQRCode
+                    }
+                
+                DispatchQueue.main.async {
+                    self.selectMission = results.compactMap { mission in
+                        return mission
+                    }
+                    
+                }
+            }
+            
+        }
+    }
+    
+    // Pulls data from Core Data.
+    private func fetchData() {
+        progress = true
+        let request = NSFetchRequest<Missions>(entityName: "Missions")
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Missions.id, ascending: false)]
+        
+        do {
+            let fetchMissions = try container.viewContext.fetch(request)
+            self.fetchMission = fetchMissions
+            if self.fetchMission?.count ?? 0 > 0 {
+                progress = false
+            }
+        } catch {
+            print("Veriler alınamadı: \(error.localizedDescription)")
+        }
+        
+    }
+    
+    // Used to reach the searched object by searching the list.
+    private func filterByMission() {
+        DispatchQueue.global(qos: .userInteractive).async {
+            if let missions = self.fetchMission {
+                let results = missions
+                    .lazy
+                    .filter { mission in
+                        return mission.title!.lowercased().contains(self.searchText.lowercased())
+                    }
+                
+                
+                DispatchQueue.main.async {
+                    self.searchMission = results.compactMap { mission in
+                        return mission
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    // Saves data to Core Data.
+    private func save() {
+        do {
+            try container.viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
     

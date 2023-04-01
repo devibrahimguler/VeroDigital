@@ -98,6 +98,18 @@ struct Home: View {
                         .environmentObject(viewModel)
                     
                 }
+                if viewModel.selectedMission != nil, viewModel.showDetailView {
+                    DetailView(animation: animation)
+                        .environmentObject(viewModel)
+                        .transition(.asymmetric(insertion: .identity, removal: .offset(y: 5)))
+                }
+            }
+        }
+        .onChange(of: viewModel.showDetailView) { newValue in
+            if !newValue {
+                withAnimation(.easeInOut(duration: 0.15).delay(0.4)){
+                    viewModel.animateCurrentMission = false
+                }
             }
         }
         .onChange(of: dataController.activeTag)
