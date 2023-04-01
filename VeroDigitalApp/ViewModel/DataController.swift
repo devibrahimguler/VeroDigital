@@ -15,6 +15,8 @@ class DataController : ObservableObject {
     @Published var progress : Bool = false
     @Published var fetchMission : [Missions]?
     @Published var selectMission : [Missions]?
+    @Published var searchMission : [Missions]?
+    @Published var searchText: String = ""
 
     @Published var activeTag: String = "From The Data"
     

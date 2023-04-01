@@ -9,6 +9,7 @@ import SwiftUI
 
 class HomeViewModel : ObservableObject {
 
+    @Published var searchActivated: Bool = false
     @Published var animateCurrentMission: Bool = false
     @Published var animateContent: Bool = false
     @Published var offsetAnimation: Bool = false

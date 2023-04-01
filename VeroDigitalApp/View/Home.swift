@@ -18,7 +18,24 @@ struct Home: View {
                 Spacer(minLength: 10)
                 
                 VStack(spacing: 15) {
-                    SearchBar()
+                    ZStack {
+                        if viewModel.searchActivated {
+                            SearchBar()
+                        } else {
+                            SearchBar()
+                                .matchedGeometryEffect(id: "SEARCHBAR", in: animation)
+                        }
+                        
+                    }
+                    .frame(width: getRect().width / 1.6)
+                    .padding(.horizontal, 25)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        withAnimation(.easeInOut) {
+                            viewModel.searchActivated = true
+                            dataController.selectMission = nil
+                        }
+                    }
                     
                 }
                 .padding(.vertical)
@@ -48,22 +65,9 @@ struct Home: View {
                                 
                             }
 
-                            VStack(spacing: 35) {
-                                ForEach(missions) { mission in
-                                    MissionCardView(mission: mission, animation: animation)
-                                        .environmentObject(viewModel)
-
-                                    
-                                }
-                                
-                            }
-                            .padding(.horizontal, 15)
-                            .padding(.vertical, 20)
-                            .padding(.bottom, bottomPadding(size))
-                            .background {
-                                ScrollViewDetector()
-                                    .environmentObject(dataController)
-                            }
+                            ListView(missions: missions, animation: animation, size: size)
+                                .environmentObject(dataController)
+                                .environmentObject(viewModel)
                         }
                         .coordinateSpace(name: "SCROLLVIEW")
                         
@@ -86,6 +90,16 @@ struct Home: View {
             Color.white
                 .ignoresSafeArea()
         }
+        .overlay {
+            ZStack {
+                if (viewModel.searchActivated) {
+                    SearchView(animation: animation)
+                        .environmentObject(dataController)
+                        .environmentObject(viewModel)
+                    
+                }
+            }
+        }
         .onChange(of: dataController.activeTag)
         { _ in
             dataController.filterByQRCode()
@@ -96,13 +110,7 @@ struct Home: View {
         
     }
     
-    // Used to keep a single CardView view on the Screen when scrolled to the bottom with a ScrollView.
-    func bottomPadding(_ size: CGSize = .zero) -> CGFloat {
-        let cardHeight: CGFloat = 220
-        let scrollViewHeight: CGFloat = size.height
-        
-        return  scrollViewHeight - cardHeight - 40
-    }
+    
     
     
     @ViewBuilder
