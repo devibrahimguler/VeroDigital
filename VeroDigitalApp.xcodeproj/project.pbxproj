@@ -17,6 +17,7 @@
 		0F08B84329D787C4005A568E /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84229D787C4005A568E /* Mission.swift */; };
 		0F08B84529D787FF005A568E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84429D787FF005A568E /* DataModel.swift */; };
 		0F08B84729D788DA005A568E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84629D788DA005A568E /* User.swift */; };
+		0F08B84929D7C8CB005A568E /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84829D7C8CB005A568E /* Services.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		0F08B84229D787C4005A568E /* Mission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mission.swift; sourceTree = "<group>"; };
 		0F08B84429D787FF005A568E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		0F08B84629D788DA005A568E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0F08B84829D7C8CB005A568E /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 		0F08B84129D7870A005A568E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0F08B84829D7C8CB005A568E /* Services.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				0F08B84729D788DA005A568E /* User.swift in Sources */,
 				0F08B83D29D786B3005A568E /* Home.swift in Sources */,
 				0F08B83529D78648005A568E /* VeroDigitalApp.xcdatamodeld in Sources */,
+				0F08B84929D7C8CB005A568E /* Services.swift in Sources */,
 				0F08B82929D78646005A568E /* VeroDigitalAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
