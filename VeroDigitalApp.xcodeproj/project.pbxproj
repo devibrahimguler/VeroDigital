@@ -11,8 +11,12 @@
 		0F08B82B29D78646005A568E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B82A29D78646005A568E /* ContentView.swift */; };
 		0F08B82D29D78648005A568E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F08B82C29D78648005A568E /* Assets.xcassets */; };
 		0F08B83029D78648005A568E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F08B82F29D78648005A568E /* Preview Assets.xcassets */; };
-		0F08B83229D78648005A568E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B83129D78648005A568E /* Persistence.swift */; };
+		0F08B83229D78648005A568E /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B83129D78648005A568E /* DataController.swift */; };
 		0F08B83529D78648005A568E /* VeroDigitalApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B83329D78648005A568E /* VeroDigitalApp.xcdatamodeld */; };
+		0F08B83D29D786B3005A568E /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B83C29D786B3005A568E /* Home.swift */; };
+		0F08B84329D787C4005A568E /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84229D787C4005A568E /* Mission.swift */; };
+		0F08B84529D787FF005A568E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84429D787FF005A568E /* DataModel.swift */; };
+		0F08B84729D788DA005A568E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84629D788DA005A568E /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,8 +25,12 @@
 		0F08B82A29D78646005A568E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0F08B82C29D78648005A568E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F08B82F29D78648005A568E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		0F08B83129D78648005A568E /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		0F08B83129D78648005A568E /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		0F08B83429D78648005A568E /* VeroDigitalApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VeroDigitalApp.xcdatamodel; sourceTree = "<group>"; };
+		0F08B83C29D786B3005A568E /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		0F08B84229D787C4005A568E /* Mission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mission.swift; sourceTree = "<group>"; };
+		0F08B84429D787FF005A568E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		0F08B84629D788DA005A568E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,10 +63,13 @@
 		0F08B82729D78646005A568E /* VeroDigitalApp */ = {
 			isa = PBXGroup;
 			children = (
+				0F08B84129D7870A005A568E /* Services */,
+				0F08B84029D786FA005A568E /* ViewModel */,
+				0F08B83F29D786EF005A568E /* Model */,
+				0F08B83B29D786A8005A568E /* View */,
 				0F08B82829D78646005A568E /* VeroDigitalAppApp.swift */,
 				0F08B82A29D78646005A568E /* ContentView.swift */,
 				0F08B82C29D78648005A568E /* Assets.xcassets */,
-				0F08B83129D78648005A568E /* Persistence.swift */,
 				0F08B83329D78648005A568E /* VeroDigitalApp.xcdatamodeld */,
 				0F08B82E29D78648005A568E /* Preview Content */,
 			);
@@ -71,6 +82,39 @@
 				0F08B82F29D78648005A568E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0F08B83B29D786A8005A568E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F08B83C29D786B3005A568E /* Home.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F08B83F29D786EF005A568E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0F08B84229D787C4005A568E /* Mission.swift */,
+				0F08B84429D787FF005A568E /* DataModel.swift */,
+				0F08B84629D788DA005A568E /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0F08B84029D786FA005A568E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F08B83129D78648005A568E /* DataController.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0F08B84129D7870A005A568E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,8 +187,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F08B83229D78648005A568E /* Persistence.swift in Sources */,
+				0F08B84529D787FF005A568E /* DataModel.swift in Sources */,
+				0F08B84329D787C4005A568E /* Mission.swift in Sources */,
+				0F08B83229D78648005A568E /* DataController.swift in Sources */,
 				0F08B82B29D78646005A568E /* ContentView.swift in Sources */,
+				0F08B84729D788DA005A568E /* User.swift in Sources */,
+				0F08B83D29D786B3005A568E /* Home.swift in Sources */,
 				0F08B83529D78648005A568E /* VeroDigitalApp.xcdatamodeld in Sources */,
 				0F08B82929D78646005A568E /* VeroDigitalAppApp.swift in Sources */,
 			);
