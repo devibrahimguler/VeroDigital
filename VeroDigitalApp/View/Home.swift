@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CodeScanner
 
 struct Home: View {
     @StateObject var viewModel : HomeViewModel = HomeViewModel()
@@ -42,6 +43,12 @@ struct Home: View {
                 
                 Spacer(minLength: 10)
                 
+                Button {
+                    viewModel.isShowingScanner = true
+                } label: {
+                    Image(systemName: "qrcode.viewfinder")
+                        .font(.title)
+                }
                 
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -61,6 +68,9 @@ struct Home: View {
                             PullToRefreshView {
                                 if dataController.activeTag == "From The Data" {
                                     dataController.getDataWithApi()
+                                } else
+                                {
+                                    dataController.filterByQRCode()
                                 }
                                 
                             }
@@ -75,10 +85,6 @@ struct Home: View {
                     .padding(.top, 15)
                 }
             }
-                  
-            
-            
-            
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -89,6 +95,9 @@ struct Home: View {
         .background{
             Color.white
                 .ignoresSafeArea()
+        }
+        .sheet(isPresented: $viewModel.isShowingScanner) {
+            CodeScannerView(codeTypes: [.qr], completion: handleScan)
         }
         .overlay {
             ZStack {
@@ -123,8 +132,28 @@ struct Home: View {
     }
     
     
+    // The code that will run as soon as the QR Code is read is used to add elements.
+    func handleScan(result: Result<ScanResult, ScanError>) {
+        viewModel.isShowingScanner = false
+        
+        switch result {
+        case .success(let result):
+            let details = result.string.components(separatedBy: "\n")
+            guard details.count == 12 else { return }
+            
+            let mission = Mission(task: details[0], title: details[1], description: details[2], sort: details[3], wageType: details[4],BusinessUnitKey:details[5], businessUnit: details[6], parentTaskID: details[7],preplanningBoardQuickSelect: details[8], colorCode: details[9],workingTime:details[10], isAvailableInTimeTrackingKioskMode: details[11].bool!)
+            
+            
+            dataController.addMission(mission: mission)
+            
+            dataController.fetchData()
+            
+        case .failure(let error):
+            print("Scanning failed: \(error.localizedDescription)")
+        }
+    }
     
-    
+    // SearchBar View.
     @ViewBuilder
     func SearchBar() -> some View {
         HStack(spacing: 15) {
@@ -145,6 +174,7 @@ struct Home: View {
         
     }
     
+    // Tags View.
     @ViewBuilder
     func TagsView() -> some View {
         HStack (spacing: 10) {
@@ -189,5 +219,22 @@ struct Home_Previews: PreviewProvider {
 extension View {
     func getRect() -> CGRect {
         return UIScreen.main.bounds
+    }
+}
+
+// Used to convert String to Bool.
+extension String {
+    var bool: Bool? {
+        switch self.lowercased() {
+        case "true", "t", "yes", "y":
+            return true
+        case "false", "f", "no", "n", "":
+            return false
+        default:
+            if let int = Int(self) {
+                return int != 0
+            }
+            return nil
+        }
     }
 }

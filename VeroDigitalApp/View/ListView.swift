@@ -32,16 +32,13 @@ struct ListView: View {
                             }
                         }
                     }
+                
             }
             
         }
         .padding(.horizontal, 15)
         .padding(.vertical, 20)
         .padding(.bottom, bottomPadding(size))
-        .background {
-            ScrollViewDetector()
-                .environmentObject(dataController)
-        }
     }
     
     // Used to keep a single CardView view on the Screen when scrolled to the bottom with a ScrollView.

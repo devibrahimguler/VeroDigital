@@ -71,8 +71,9 @@ struct DetailView: View {
                 .ignoresSafeArea()
                 .overlay(alignment: .top, content: {
                     MissionDetails()
+                        .padding(.leading, 30)
                 })
-                .padding(.leading, 30)
+                .padding(.leading, 0)
                 .padding(.top, -180)
                 .zIndex(0)
                 .padding(viewModel.animateContent ? 1 : 0)
@@ -121,12 +122,19 @@ struct DetailView: View {
                             InfoView(title: "Timely Tracking", subTitle: "\(mission.isAvailableInTimeTrackingKioskMode)")
                         }
                         
-                        
+                        VStack(alignment: .center){
+                            Image(uiImage: viewModel.qrCode)
+                                .resizable()
+                                .interpolation(.none)
+                                .scaledToFit()
+                                .frame(width: 200, height: 200)
+                        }
+                        .frame(maxWidth: .infinity)
                     }
                     .padding(.bottom, 15)
                     .padding(.top, 20)
                 }
-       
+                .onAppear(perform: viewModel.getQRCode)
             }
             
         }

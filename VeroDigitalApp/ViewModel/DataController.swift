@@ -104,7 +104,7 @@ class DataController : ObservableObject {
     }
     
     // Pulls data from Core Data.
-    private func fetchData() {
+    func fetchData() {
         progress = true
         let request = NSFetchRequest<Missions>(entityName: "Missions")
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Missions.id, ascending: false)]

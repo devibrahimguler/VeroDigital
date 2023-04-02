@@ -31,6 +31,7 @@ struct SearchView: View {
                 
                 HStack(spacing: 15) {
                     Image(systemName: "magnifyingglass")
+                    
                         .font(.title2)
                         .foregroundColor(.gray)
                     
@@ -76,7 +77,6 @@ struct SearchView: View {
                             ListView(missions: missions, animation: animation, size: size)
                                 .environmentObject(dataController)
                                 .environmentObject(viewModel)
-                
                      
                         }
                         .frame(maxWidth: .infinity,maxHeight: .infinity)

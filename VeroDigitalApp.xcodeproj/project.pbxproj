@@ -19,7 +19,6 @@
 		0F08B84729D788DA005A568E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84629D788DA005A568E /* User.swift */; };
 		0F08B84929D7C8CB005A568E /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84829D7C8CB005A568E /* Services.swift */; };
 		0F08B84B29D7E7C2005A568E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84A29D7E7C2005A568E /* HomeViewModel.swift */; };
-		0F08B84D29D7E897005A568E /* ScrollViewDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84C29D7E897005A568E /* ScrollViewDetector.swift */; };
 		0F08B84F29D7E8D0005A568E /* PullToRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B84E29D7E8D0005A568E /* PullToRefreshView.swift */; };
 		0F08B85129D7E8F3005A568E /* MissionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B85029D7E8F3005A568E /* MissionCardView.swift */; };
 		0F08B85329D7EF68005A568E /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B85229D7EF68005A568E /* SearchView.swift */; };
@@ -27,6 +26,7 @@
 		0F08B85929D7F868005A568E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B85829D7F868005A568E /* DetailView.swift */; };
 		0F08B85B29D7F884005A568E /* CustomCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B85A29D7F884005A568E /* CustomCorners.swift */; };
 		0F08B85D29D7F8FE005A568E /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B85C29D7F8FE005A568E /* InfoView.swift */; };
+		0F08B86029D7FEFC005A568E /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 0F08B85F29D7FEFC005A568E /* CodeScanner */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +43,6 @@
 		0F08B84629D788DA005A568E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0F08B84829D7C8CB005A568E /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		0F08B84A29D7E7C2005A568E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		0F08B84C29D7E897005A568E /* ScrollViewDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewDetector.swift; sourceTree = "<group>"; };
 		0F08B84E29D7E8D0005A568E /* PullToRefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefreshView.swift; sourceTree = "<group>"; };
 		0F08B85029D7E8F3005A568E /* MissionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionCardView.swift; sourceTree = "<group>"; };
 		0F08B85229D7EF68005A568E /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -51,6 +50,7 @@
 		0F08B85829D7F868005A568E /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		0F08B85A29D7F884005A568E /* CustomCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCorners.swift; sourceTree = "<group>"; };
 		0F08B85C29D7F8FE005A568E /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		0F08B86129D800C8005A568E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F08B86029D7FEFC005A568E /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +84,7 @@
 		0F08B82729D78646005A568E /* VeroDigitalApp */ = {
 			isa = PBXGroup;
 			children = (
+				0F08B86129D800C8005A568E /* Info.plist */,
 				0F08B84129D7870A005A568E /* Services */,
 				0F08B84029D786FA005A568E /* ViewModel */,
 				0F08B83F29D786EF005A568E /* Model */,
@@ -108,7 +110,6 @@
 			isa = PBXGroup;
 			children = (
 				0F08B83C29D786B3005A568E /* Home.swift */,
-				0F08B84C29D7E897005A568E /* ScrollViewDetector.swift */,
 				0F08B84E29D7E8D0005A568E /* PullToRefreshView.swift */,
 				0F08B85029D7E8F3005A568E /* MissionCardView.swift */,
 				0F08B85229D7EF68005A568E /* SearchView.swift */,
@@ -163,6 +164,9 @@
 			dependencies = (
 			);
 			name = VeroDigitalApp;
+			packageProductDependencies = (
+				0F08B85F29D7FEFC005A568E /* CodeScanner */,
+			);
 			productName = VeroDigitalApp;
 			productReference = 0F08B82529D78646005A568E /* VeroDigitalApp.app */;
 			productType = "com.apple.product-type.application";
@@ -191,6 +195,9 @@
 				Base,
 			);
 			mainGroup = 0F08B81C29D78646005A568E;
+			packageReferences = (
+				0F08B85E29D7FEFC005A568E /* XCRemoteSwiftPackageReference "CodeScanner" */,
+			);
 			productRefGroup = 0F08B82629D78646005A568E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -218,7 +225,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F08B84529D787FF005A568E /* DataModel.swift in Sources */,
-				0F08B84D29D7E897005A568E /* ScrollViewDetector.swift in Sources */,
 				0F08B85729D7F20F005A568E /* ListView.swift in Sources */,
 				0F08B84329D787C4005A568E /* Mission.swift in Sources */,
 				0F08B83229D78648005A568E /* DataController.swift in Sources */,
@@ -366,7 +372,8 @@
 				DEVELOPMENT_TEAM = H6YXW4WBS6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = VeroDigitalApp/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to scan QR codes.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -395,7 +402,8 @@
 				DEVELOPMENT_TEAM = H6YXW4WBS6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = VeroDigitalApp/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to scan QR codes.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -435,6 +443,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0F08B85E29D7FEFC005A568E /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0F08B85F29D7FEFC005A568E /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F08B85E29D7FEFC005A568E /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		0F08B83329D78648005A568E /* VeroDigitalApp.xcdatamodeld */ = {

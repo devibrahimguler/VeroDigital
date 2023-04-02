@@ -87,6 +87,7 @@ struct MissionCardView: View {
     }
     
     
+    // Used to set the rotation effect.
     func convertOffsetToRotation(_ rect: CGRect) -> CGFloat {
         let cardHeight = rect.height
         let minY = rect.minY - 20
@@ -103,6 +104,7 @@ struct MissionCardView_Previews: PreviewProvider {
     }
 }
 
+// Used to convert string hex color codes to colors.
 extension Color {
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)

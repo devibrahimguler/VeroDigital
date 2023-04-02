@@ -7,7 +7,7 @@
 
 import SwiftUI
 // It is used to pull data through API.
-class Services {
+final class Services {
     private var url : String
     private var token : String
     private var tokenType : String

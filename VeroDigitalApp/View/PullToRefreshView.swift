@@ -10,8 +10,8 @@ import SwiftUI
 struct PullToRefreshView: View
 {
     private static let minRefreshTimeInterval = TimeInterval(0.2)
-    private static let triggerHeight = CGFloat(20)
-    private static let indicatorHeight = CGFloat(20)
+    private static let triggerHeight = CGFloat(30)
+    private static let indicatorHeight = CGFloat(30)
     private static let fullHeight = triggerHeight + indicatorHeight
     
     let backgroundColor: Color
