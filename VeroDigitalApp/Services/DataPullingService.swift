@@ -20,27 +20,18 @@ final class DataPullingService {
     }
     
     // Used to login and retrieve their data.
-    func loginApi(completion: @escaping ([Mission])->()) {
+    func loginAndGetDataAPI (completion: @escaping ([Mission])->()) {
         self.postServices(ofType: User.self, url: loginURL, token: token, tokenType: tokenType, isGetData: false) { objects in
-            self.token = objects[0].oauth.access_token
-            self.tokenType = objects[0].oauth.token_type
-            UserDefaults.standard.set(objects[0].oauth.token_type, forKey: "tokenType")
-            UserDefaults.standard.set(objects[0].oauth.access_token, forKey: "token")
+            let newToken = objects[0].oauth.access_token
+            let newTokenType = objects[0].oauth.token_type
+            let dataURL = "https://api.baubuddy.de/dev/index.php/v1/tasks/select"
             
-            self.getData(token: self.token, tokenType: self.tokenType) { dataObject in
+            self.postServices(ofType: Mission.self, url: dataURL, token: newToken, tokenType: newTokenType, isGetData: true){ dataObject in
                 completion(dataObject)
             }
         }
     }
-    
-    // Used to retrieve their data.
-    func getData(token: String, tokenType: String,completion: @escaping ([Mission])->()) {
-        let dataURL = "https://api.baubuddy.de/dev/index.php/v1/tasks/select"
-        self.postServices(ofType: Mission.self, url: dataURL, token: token, tokenType: tokenType, isGetData: true){ dataObject in
-            completion(dataObject)
-        }
-    }
-    
+
     // Used for generic function to pull data.
     private func postServices<T : Decodable>(ofType: T.Type, url: String, token: String, tokenType: String, isGetData: Bool, objects: @escaping ([T]) -> ())
     where T : DataModel{

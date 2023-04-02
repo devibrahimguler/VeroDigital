@@ -51,10 +51,6 @@ class DataController : ObservableObject {
                 }
             })
         
-        if(UserDefaults.standard.object(forKey: "token") == nil ) {
-            self.loginAndGetData()
-        }
-        
         addAllMission()
     }
     
@@ -64,38 +60,11 @@ class DataController : ObservableObject {
         
         save()
     }
-    
-    // Pulls data from the API.
-    func getData() {
-        progress = true
-        if let tokenType = UserDefaults.standard.object(forKey: "tokenType") as? String {
-            if let token = UserDefaults.standard.object(forKey: "token") as? String {
-                
-                services.getData(token: token, tokenType: tokenType) { data in
-                    if data.count != 0 {
-                        
-                        if data.count > self.fetchMission?.count ?? 0 {
-                            self.deleteAllMission()
-                            
-                            for mission in data {
-                                self.addingModel(mission: mission, isQRCode: false)
-                            }
-                            self.save()
-                        }
-                        
-                        self.fetchData()
-                        self.filterByQRCode()
-                        self.progress = false
-                    }
-                }
-            }
-        }
-    }
-    
+
     // Login API and Pulls data from the API.
     func loginAndGetData() {
         progress = true
-        services.loginApi { data in
+        services.loginAndGetDataAPI { data in
             if data.count != 0 {
                 
                 if data.count > self.fetchMission?.count ?? 0 {
@@ -189,7 +158,7 @@ class DataController : ObservableObject {
         self.fetchData()
         
         if fetchMission?.count ?? 0 <= 0 {
-            self.getData()
+            self.loginAndGetData()
         }
     }
     
