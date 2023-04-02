@@ -13,11 +13,12 @@ import CoreImage.CIFilterBuiltins
 class DataController : ObservableObject {
     
     @Published var progress : Bool = false
+    
     @Published var fetchMission : [Missions]?
     @Published var selectMission : [Missions]?
     @Published var searchMission : [Missions]?
     @Published var searchText: String = ""
-
+    
     @Published var activeTag: String = "From The Data"
     
     private let services : Services = Services()
@@ -49,7 +50,11 @@ class DataController : ObservableObject {
                     self.searchMission = nil
                 }
             })
-
+        
+        if(UserDefaults.standard.object(forKey: "token") == nil ) {
+            self.loginAndGetData()
+        }
+        
         addAllMission()
     }
     
@@ -61,9 +66,36 @@ class DataController : ObservableObject {
     }
     
     // Pulls data from the API.
-    func getDataWithApi() {
+    func getData() {
         progress = true
-        services.getDataWithApi { data in
+        if let tokenType = UserDefaults.standard.object(forKey: "tokenType") as? String {
+            if let token = UserDefaults.standard.object(forKey: "token") as? String {
+                
+                services.getData(token: token, tokenType: tokenType) { data in
+                    if data.count != 0 {
+                        
+                        if data.count > self.fetchMission?.count ?? 0 {
+                            self.deleteAllMission()
+                            
+                            for mission in data {
+                                self.addingModel(mission: mission, isQRCode: false)
+                            }
+                            self.save()
+                        }
+                        
+                        self.fetchData()
+                        self.filterByQRCode()
+                        self.progress = false
+                    }
+                }
+            }
+        }
+    }
+    
+    // Login API and Pulls data from the API.
+    func loginAndGetData() {
+        progress = true
+        services.loginApi { data in
             if data.count != 0 {
                 
                 if data.count > self.fetchMission?.count ?? 0 {
@@ -157,7 +189,7 @@ class DataController : ObservableObject {
         self.fetchData()
         
         if fetchMission?.count ?? 0 <= 0 {
-            getDataWithApi()
+            self.getData()
         }
     }
     

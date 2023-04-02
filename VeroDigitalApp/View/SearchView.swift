@@ -57,10 +57,6 @@ struct SearchView: View {
             .padding(.horizontal)
             .padding(.top)
             
-            Divider()
-                .padding(.top, 40)
-                .padding(.bottom, 10)
-            
             if let missions = dataController.searchMission {
                 if missions.isEmpty {
                     VStack{

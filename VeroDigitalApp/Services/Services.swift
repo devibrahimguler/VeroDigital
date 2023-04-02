@@ -11,30 +11,32 @@ final class Services {
     private var url : String
     private var token : String
     private var tokenType : String
-    private var isRefresh : Bool
     
-    init(isRefresh: Bool = false) {
-        
+    init() {
         self.url = "https://api.baubuddy.de/index.php/login"
         self.token = "QVBJX0V4cGxvcmVyOjEyMzQ1NmlzQUxhbWVQYXNz"
         self.tokenType = "Basic"
-        self.isRefresh = isRefresh
     }
     
-    // Used to log in and retrieve their data.
-    func getDataWithApi(completion: @escaping ([Mission])->()) {
+    // Used to login and retrieve their data.
+    func loginApi(completion: @escaping ([Mission])->()) {
         self.postServices(ofType: User.self, url: url, token: token, tokenType: tokenType, isGetData: false) { objects in
-            self.url = "https://api.baubuddy.de/dev/index.php/v1/tasks/select"
+            self.token = objects[0].oauth.access_token
             self.tokenType = objects[0].oauth.token_type
-            if self.isRefresh {
-                self.token = objects[0].oauth.refresh_token
-            } else {
-                self.token = objects[0].oauth.access_token
-            }
-           
-            self.postServices(ofType: Mission.self, url: self.url, token: self.token, tokenType: self.tokenType, isGetData: true){ dataObject in
+            UserDefaults.standard.set(objects[0].oauth.token_type, forKey: "tokenType")
+            UserDefaults.standard.set(objects[0].oauth.access_token, forKey: "token")
+            
+            self.getData(token: self.token, tokenType: self.tokenType) { dataObject in
                 completion(dataObject)
             }
+        }
+    }
+    
+    // Used to retrieve their data.
+    func getData(token: String, tokenType: String,completion: @escaping ([Mission])->()) {
+        self.url = "https://api.baubuddy.de/dev/index.php/v1/tasks/select"
+        self.postServices(ofType: Mission.self, url: self.url, token: token, tokenType: tokenType, isGetData: true){ dataObject in
+            completion(dataObject)
         }
     }
     

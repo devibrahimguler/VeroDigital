@@ -67,7 +67,8 @@ struct Home: View {
                         ScrollView(.vertical, showsIndicators: false) {
                             PullToRefreshView {
                                 if dataController.activeTag == "From The Data" {
-                                    dataController.getDataWithApi()
+                                    dataController.getData()
+                                    
                                 } else
                                 {
                                     dataController.filterByQRCode()
