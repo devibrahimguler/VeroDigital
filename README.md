@@ -2,7 +2,7 @@
 
 This application is a mobile app that allows you to share and save your data using QR codes. The app works on iOS devices.
 
-## Installation
+## Installation
 
 This project is developed using SwiftUI. 
 To run the project, CodeScanner needs to be installed first.
