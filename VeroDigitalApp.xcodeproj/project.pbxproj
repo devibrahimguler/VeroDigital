@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0F08B82929D78646005A568E /* VeroDigitalAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B82829D78646005A568E /* VeroDigitalAppApp.swift */; };
 		0F08B82B29D78646005A568E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B82A29D78646005A568E /* ContentView.swift */; };
-		0F08B82D29D78648005A568E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F08B82C29D78648005A568E /* Assets.xcassets */; };
 		0F08B83029D78648005A568E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F08B82F29D78648005A568E /* Preview Assets.xcassets */; };
 		0F08B83229D78648005A568E /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B83129D78648005A568E /* DataController.swift */; };
 		0F08B83529D78648005A568E /* VeroDigitalApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B83329D78648005A568E /* VeroDigitalApp.xcdatamodeld */; };
@@ -27,13 +26,13 @@
 		0F08B85B29D7F884005A568E /* CustomCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B85A29D7F884005A568E /* CustomCorners.swift */; };
 		0F08B85D29D7F8FE005A568E /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F08B85C29D7F8FE005A568E /* InfoView.swift */; };
 		0F08B86029D7FEFC005A568E /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 0F08B85F29D7FEFC005A568E /* CodeScanner */; };
+		0F2CE4E029D902790070319B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F2CE4DF29D902790070319B /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0F08B82529D78646005A568E /* VeroDigitalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VeroDigitalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F08B82829D78646005A568E /* VeroDigitalAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeroDigitalAppApp.swift; sourceTree = "<group>"; };
 		0F08B82A29D78646005A568E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		0F08B82C29D78648005A568E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F08B82F29D78648005A568E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0F08B83129D78648005A568E /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		0F08B83429D78648005A568E /* VeroDigitalApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VeroDigitalApp.xcdatamodel; sourceTree = "<group>"; };
@@ -51,6 +50,7 @@
 		0F08B85A29D7F884005A568E /* CustomCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCorners.swift; sourceTree = "<group>"; };
 		0F08B85C29D7F8FE005A568E /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		0F08B86129D800C8005A568E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0F2CE4DF29D902790070319B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +91,7 @@
 				0F08B83B29D786A8005A568E /* View */,
 				0F08B82829D78646005A568E /* VeroDigitalAppApp.swift */,
 				0F08B82A29D78646005A568E /* ContentView.swift */,
-				0F08B82C29D78648005A568E /* Assets.xcassets */,
+				0F2CE4DF29D902790070319B /* Assets.xcassets */,
 				0F08B83329D78648005A568E /* VeroDigitalApp.xcdatamodeld */,
 				0F08B82E29D78648005A568E /* Preview Content */,
 			);
@@ -212,8 +212,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F2CE4E029D902790070319B /* Assets.xcassets in Resources */,
 				0F08B83029D78648005A568E /* Preview Assets.xcassets in Resources */,
-				0F08B82D29D78648005A568E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
