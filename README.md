@@ -13,7 +13,7 @@ Follow the steps below to install CodeScanner:
 3. Add Packages.
 4. Write "https://github.com/twostraws/CodeScanner" in search bar.
 
-## Usage
+## Usage
 
 After the app is launched, the app logs in to the database and retrieves the data. The data is displayed on a ScrollView, and it can be retrieved from the database by using the pull-2-refresh feature. After selecting the desired data, a detail page opens up. The detail page displays the data on a ScrollView, and at the bottom of the data, there is a QR code specific to that data. This QR code can be scanned to transfer the data to other users.
 
