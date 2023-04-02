@@ -7,20 +7,21 @@
 
 import SwiftUI
 // It is used to pull data through API.
-final class Services {
-    private var url : String
+final class DataPullingService {
+    
+    private var loginURL : String
     private var token : String
     private var tokenType : String
     
     init() {
-        self.url = "https://api.baubuddy.de/index.php/login"
+        self.loginURL = "https://api.baubuddy.de/index.php/login"
         self.token = "QVBJX0V4cGxvcmVyOjEyMzQ1NmlzQUxhbWVQYXNz"
         self.tokenType = "Basic"
     }
     
     // Used to login and retrieve their data.
     func loginApi(completion: @escaping ([Mission])->()) {
-        self.postServices(ofType: User.self, url: url, token: token, tokenType: tokenType, isGetData: false) { objects in
+        self.postServices(ofType: User.self, url: loginURL, token: token, tokenType: tokenType, isGetData: false) { objects in
             self.token = objects[0].oauth.access_token
             self.tokenType = objects[0].oauth.token_type
             UserDefaults.standard.set(objects[0].oauth.token_type, forKey: "tokenType")
@@ -34,8 +35,8 @@ final class Services {
     
     // Used to retrieve their data.
     func getData(token: String, tokenType: String,completion: @escaping ([Mission])->()) {
-        self.url = "https://api.baubuddy.de/dev/index.php/v1/tasks/select"
-        self.postServices(ofType: Mission.self, url: self.url, token: token, tokenType: tokenType, isGetData: true){ dataObject in
+        let dataURL = "https://api.baubuddy.de/dev/index.php/v1/tasks/select"
+        self.postServices(ofType: Mission.self, url: dataURL, token: token, tokenType: tokenType, isGetData: true){ dataObject in
             completion(dataObject)
         }
     }

@@ -21,7 +21,7 @@ class DataController : ObservableObject {
     
     @Published var activeTag: String = "From The Data"
     
-    private let services : Services = Services()
+    private let services : DataPullingService = DataPullingService()
     
     var tags: [String] = [
         "From The Data", "From The QR Code"
