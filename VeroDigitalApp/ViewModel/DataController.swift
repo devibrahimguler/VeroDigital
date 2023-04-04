@@ -54,33 +54,74 @@ class DataController : ObservableObject {
         addAllMission()
     }
     
-    // Adds Data to Core Data.
-    func addMission(mission: Mission) {
-        addingModel(mission: mission, isQRCode: true)
-        
-        save()
-    }
-
     // Login API and Pulls data from the API.
-    func loginAndGetData() {
-        progress = true
-        services.loginAndGetDataAPI { data in
-            if data.count != 0 {
+    func loginData() {
+        let url = "https://api.baubuddy.de/index.php/login"
+        let token = "QVBJX0V4cGxvcmVyOjEyMzQ1NmlzQUxhbWVQYXNz"
+        let tokenType = "Basic"
+        services.postServices(ofType: User.self, url: url, token: token, tokenType: tokenType, isGetData: false) { result in
+            print("login data")
+            switch result{
+            case .success(let data):
+                UserDefaults.standard.set(data[0].oauth.access_token, forKey: "token")
+                UserDefaults.standard.set(data[0].oauth.token_type, forKey: "tokenType")
+                self.getData()
                 
-                if data.count > self.fetchMission?.count ?? 0 {
-                    self.deleteAllMission()
-                    
-                    for mission in data {
-                        self.addingModel(mission: mission, isQRCode: false)
-                    }
-                    self.save()
-                }
-                
+            case .failure(let err):
+                print(err)
                 self.fetchData()
                 self.filterByQRCode()
                 self.progress = false
             }
         }
+    }
+    
+    // Pulls data from the API with token.
+    func getData() {
+        self.progress = true
+        guard let token = UserDefaults.standard.object(forKey: "token") as? String else {
+            return self.loginData()
+        }
+        guard let tokenType = UserDefaults.standard.object(forKey: "tokenType") as? String else {
+            return self.loginData()
+        }
+        
+        let url =  "https://api.baubuddy.de/dev/index.php/v1/tasks/select"
+        services.postServices(ofType: Mission.self, url: url, token: token, tokenType: tokenType, isGetData: true) { result in
+            print("get data")
+            switch result{
+            case .success(let data):
+                if data.count != 0 {
+                    
+                    if data.count > self.fetchMission?.count ?? 0 {
+                        self.deleteAllMission()
+                        
+                        for mission in data {
+                            self.addingModel(mission: mission, isQRCode: false)
+                        }
+                        self.save()
+                    }
+                    
+                    self.fetchData()
+                    self.filterByQRCode()
+                    self.progress = false
+                }
+            case .failure(let err):
+                if(err != .statusError) {
+                    self.loginData()
+                }
+                self.progress = false
+            }
+        }
+        
+    }
+    
+    
+    // Adds Data to Core Data.
+    func addMission(mission: Mission) {
+        addingModel(mission: mission, isQRCode: true)
+        
+        save()
     }
     
     // Used to get data from CoreData.
@@ -158,7 +199,7 @@ class DataController : ObservableObject {
         self.fetchData()
         
         if fetchMission?.count ?? 0 <= 0 {
-            self.loginAndGetData()
+            self.loginData()
         }
     }
     

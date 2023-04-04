@@ -9,31 +9,8 @@ import SwiftUI
 // It is used to pull data through API.
 final class DataPullingService {
     
-    private var loginURL : String
-    private var token : String
-    private var tokenType : String
-    
-    init() {
-        self.loginURL = "https://api.baubuddy.de/index.php/login"
-        self.token = "QVBJX0V4cGxvcmVyOjEyMzQ1NmlzQUxhbWVQYXNz"
-        self.tokenType = "Basic"
-    }
-    
-    // Used to login and retrieve their data.
-    func loginAndGetDataAPI (completion: @escaping ([Mission])->()) {
-        self.postServices(ofType: User.self, url: loginURL, token: token, tokenType: tokenType, isGetData: false) { objects in
-            let newToken = objects[0].oauth.access_token
-            let newTokenType = objects[0].oauth.token_type
-            let dataURL = "https://api.baubuddy.de/dev/index.php/v1/tasks/select"
-            
-            self.postServices(ofType: Mission.self, url: dataURL, token: newToken, tokenType: newTokenType, isGetData: true){ dataObject in
-                completion(dataObject)
-            }
-        }
-    }
-
     // Used for generic function to pull data.
-    private func postServices<T : Decodable>(ofType: T.Type, url: String, token: String, tokenType: String, isGetData: Bool, objects: @escaping ([T]) -> ())
+    func postServices<T : Decodable>(ofType: T.Type, url: String, token: String, tokenType: String, isGetData: Bool, completion: @escaping (Result<[T],ConnectionError>)  -> ())
     where T : DataModel{
         let headers = [
             "Authorization": "\(tokenType) \(token)",
@@ -55,6 +32,7 @@ final class DataPullingService {
             
             guard let postData = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
                 print("Error serializing parameters to JSON")
+                completion(.failure(.dataError))
                 exit(1)
             }
             
@@ -67,33 +45,43 @@ final class DataPullingService {
         let task = session.dataTask(with: request) { (data, response, error) in
             guard let httpResponse = response as? HTTPURLResponse, error == nil else {
                 print("Error: \(error?.localizedDescription ?? "Unknown error")")
-                return
+                return completion(.failure(.responseError))
             }
             guard (200...299).contains(httpResponse.statusCode) else {
                 print("HTTP response status code: \(httpResponse.statusCode)")
-                return
+                return completion(.failure(.statusError))
             }
             guard let responseData = data else {
                 print("No response data received")
-                return
+                return completion(.failure(.dataError))
             }
             do {
                 let decoder = JSONDecoder()
                 if isGetData {
                     let json = try decoder.decode([T].self, from: responseData)
                     DispatchQueue.main.async {
-                        objects(json)
+                        completion(.success(json))
                     }
                 }
                 else {
                     let json = try decoder.decode(T.self, from: responseData)
-                    objects([json])
+                    completion(.success([json]))
                 }
                 
             } catch {
                 print("Error decoding response data: \(error)")
+                return completion(.failure(.generalError))
             }
         }
         task.resume()
+    }
+    
+    // Error handling.
+    enum ConnectionError: Error {
+        case responseError
+        case statusError
+        case dataError
+        case generalError
+        
     }
 }

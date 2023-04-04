@@ -67,7 +67,7 @@ struct Home: View {
                         ScrollView(.vertical, showsIndicators: false) {
                             PullToRefreshView {
                                 if dataController.activeTag == "From The Data" {
-                                    dataController.loginAndGetData()
+                                    dataController.getData()
                                     
                                 } else
                                 {
