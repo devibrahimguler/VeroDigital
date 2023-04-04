@@ -107,10 +107,12 @@ class DataController : ObservableObject {
                     self.progress = false
                 }
             case .failure(let err):
-                if(err != .statusError) {
+                if(err == .statusError) {
                     self.loginData()
                 }
-                self.progress = false
+                DispatchQueue.main.async {
+                    self.progress = false
+                }
             }
         }
         
