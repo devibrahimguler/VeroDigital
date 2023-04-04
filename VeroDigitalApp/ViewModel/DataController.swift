@@ -71,14 +71,18 @@ class DataController : ObservableObject {
                 print(err)
                 self.fetchData()
                 self.filterByQRCode()
-                self.progress = false
+                DispatchQueue.main.async {
+                    self.progress = false
+                }
             }
         }
     }
     
     // Pulls data from the API with token.
     func getData() {
-        self.progress = true
+        DispatchQueue.main.async {
+            self.progress = true
+        }
         guard let token = UserDefaults.standard.object(forKey: "token") as? String else {
             return self.loginData()
         }
@@ -149,7 +153,9 @@ class DataController : ObservableObject {
     
     // Pulls data from Core Data.
     func fetchData() {
-        progress = true
+        DispatchQueue.main.async {
+            self.progress = true
+        }
         let request = NSFetchRequest<Missions>(entityName: "Missions")
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Missions.id, ascending: false)]
         
@@ -157,7 +163,9 @@ class DataController : ObservableObject {
             let fetchMissions = try container.viewContext.fetch(request)
             self.fetchMission = fetchMissions
             if self.fetchMission?.count ?? 0 > 0 {
-                progress = false
+                DispatchQueue.main.async {
+                    self.progress = false
+                }
             }
         } catch {
             print("Veriler alınamadı: \(error.localizedDescription)")
