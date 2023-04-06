@@ -10,7 +10,7 @@ import SwiftUI
 final class DataPullingService {
     
     // Used for generic function to pull data.
-    func postServices<T : Decodable>(ofType: T.Type, url: String, token: String, tokenType: String, isGetData: Bool, completion: @escaping (Result<[T],ConnectionError>)  -> ())
+    func postServices<T : Decodable>(ofType: T.Type, url: String, token: String, tokenType: String, completion: @escaping (Result<[T],ConnectionError>)  -> ())
     where T : DataModel{
         let headers = [
             "Authorization": "\(tokenType) \(token)",
@@ -22,7 +22,7 @@ final class DataPullingService {
         
         request.allHTTPHeaderFields = headers
         
-        if isGetData {
+        if (T.Type.self == Mission.Type.self) {
             request.httpMethod = "GET"
         } else {
             let parameters = [
@@ -57,7 +57,7 @@ final class DataPullingService {
             }
             do {
                 let decoder = JSONDecoder()
-                if isGetData {
+                if (T.Type.self == Mission.Type.self) {
                     let json = try decoder.decode([T].self, from: responseData)
                     DispatchQueue.main.async {
                         completion(.success(json))

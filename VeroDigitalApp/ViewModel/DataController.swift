@@ -59,8 +59,7 @@ class DataController : ObservableObject {
         let url = "https://api.baubuddy.de/index.php/login"
         let token = "QVBJX0V4cGxvcmVyOjEyMzQ1NmlzQUxhbWVQYXNz"
         let tokenType = "Basic"
-        services.postServices(ofType: User.self, url: url, token: token, tokenType: tokenType, isGetData: false) { result in
-            print("login data")
+        services.postServices(ofType: User.self, url: url, token: token, tokenType: tokenType) { result in
             switch result{
             case .success(let data):
                 UserDefaults.standard.set(data[0].oauth.access_token, forKey: "token")
@@ -91,8 +90,7 @@ class DataController : ObservableObject {
         }
         
         let url =  "https://api.baubuddy.de/dev/index.php/v1/tasks/select"
-        services.postServices(ofType: Mission.self, url: url, token: token, tokenType: tokenType, isGetData: true) { result in
-            print("get data")
+        services.postServices(ofType: Mission.self, url: url, token: token, tokenType: tokenType) { result in
             switch result{
             case .success(let data):
                 if data.count != 0 {
