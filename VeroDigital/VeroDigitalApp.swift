@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct VeroDigitalAppApp: App {
+struct VeroDigitalApp: App {
 
     var body: some Scene {
         WindowGroup {

@@ -31,7 +31,7 @@ class DataController : ObservableObject {
     private var searchCancellable: AnyCancellable?
     
     init() {
-        container = NSPersistentContainer(name: "VeroDigitalApp")
+        container = NSPersistentContainer(name: "VeroDigital")
         
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
