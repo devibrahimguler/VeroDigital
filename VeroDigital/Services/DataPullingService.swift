@@ -10,8 +10,7 @@ import SwiftUI
 final class DataPullingService {
     
     // Used for generic function to pull data.
-    func postServices<T : Decodable>(ofType: T.Type, url: String, token: String, tokenType: String, completion: @escaping (Result<[T],ConnectionError>)  -> ())
-    where T : DataModel{
+    func postServices<T : Decodable & DataModel>(ofType: T.Type, url: String, token: String, tokenType: String, completion: @escaping (Result<[T],ConnectionError>)  -> ()){
         let headers = [
             "Authorization": "\(tokenType) \(token)",
             "Content-Type": "application/json"
