@@ -159,12 +159,13 @@ class DataController : ObservableObject {
         
         do {
             let fetchMissions = try container.viewContext.fetch(request)
-            self.fetchMission = fetchMissions
-            if self.fetchMission?.count ?? 0 > 0 {
-                DispatchQueue.main.async {
-                    self.progress = false
+            DispatchQueue.main.async {
+                self.fetchMission = fetchMissions
+                if self.fetchMission?.count ?? 0 > 0 {
+                        self.progress = false
                 }
             }
+            
         } catch {
             print("Veriler alınamadı: \(error.localizedDescription)")
         }
